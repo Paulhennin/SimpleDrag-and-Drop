@@ -3,9 +3,10 @@ import React from 'react';
 function Board(props){
     const drop = event => {
         event.preventDefault();
+
         const card_id = event.dataTransfer.getData('card_id');
-        console.log('coucou', event.target.id);
         const card = document.getElementById(card_id);
+        
         card.style.display = 'block';
 
         event.target.insertBefore(card, event.target.nexSibling);

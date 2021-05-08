@@ -5,12 +5,6 @@ function Card (props) {
     const dragStart = event => {
         const target = event.target;
         event.dataTransfer.setData('card_id', target.id);
-        var board = target.parentNode;
-        console.log(target.parentNode);
-        setTimeout(() => {
-            target.style.display = "none";
-        },0);
-        return board;
     }
 
     const dragOver = event =>{
