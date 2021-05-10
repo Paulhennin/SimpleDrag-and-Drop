@@ -10,22 +10,17 @@ class App extends React.PureComponent {
   dragStart = event => {
     const target = event.target;
     event.dataTransfer.setData('card_id', target.id);
-    console.log("dragStart", event.target);
   }
 
   dragOver = event =>{
-    console.log('dragOver', event.target.parentNode);
-    this.setState({
-      position: event.target.parentNode
-    })
     event.stopPropagation();
   }
   drop = event => {
     event.preventDefault();
-    console.log("drop", event.target);
     const card_id = event.dataTransfer.getData('card_id');
     const card = document.getElementById(card_id);
     card.style.display = 'block';
+
     event.target.insertBefore(card, event.target.nexSibling);
   }
 
