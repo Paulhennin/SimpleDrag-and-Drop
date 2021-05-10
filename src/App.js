@@ -4,23 +4,35 @@ import Card from './components/Card'
 
 class App extends React.PureComponent {
   state = {
-    position: '',
+    card: '',
   };
 
   dragStart = event => {
     const target = event.target;
     event.dataTransfer.setData('card_id', target.id);
+
+    setTimeout(() => {
+      target.style.display = "none";
+    })
+
+    this.setState({
+      card: event.target
+    })
+  }
+
+  dragEnd = event => { 
+    const { card } = this.state;
+    card.style.display = 'block';
   }
 
   dragOver = event =>{
     event.stopPropagation();
   }
+
   drop = event => {
     event.preventDefault();
-    const card_id = event.dataTransfer.getData('card_id');
-    const card = document.getElementById(card_id);
+    const { card } = this.state;
     card.style.display = 'block';
-
     event.target.insertBefore(card, event.target.nexSibling);
   }
 
@@ -44,6 +56,7 @@ class App extends React.PureComponent {
                 draggable="true"
                 dragOver={this.dragOver}
                 dragStart={this.dragStart}
+                dragEnd={this.dragEnd}
               >
                   <p>Card One</p>
               </Card>
@@ -53,6 +66,7 @@ class App extends React.PureComponent {
                 draggable="true"
                 dragOver={this.dragOver}
                 dragStart={this.dragStart}
+                dragEnd={this.dragEnd}
               >
                   <p>Card Two</p>
               </Card>
@@ -69,6 +83,7 @@ class App extends React.PureComponent {
                 draggable="true"
                 dragOver={this.dragOver}
                 dragStart={this.dragStart}
+                dragEnd={this.dragEnd}
               >
                   <p>Card Three</p>
               </Card>
